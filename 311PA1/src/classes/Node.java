@@ -13,7 +13,6 @@ public class Node {
 	private Endpoint endpoint;
 	private Endpoint emax;
 	
-	//test
 	public Node getParent() {
 		return this.parent;
 	}
