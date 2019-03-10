@@ -2,49 +2,54 @@ package classes;
 
 public class Node {
 
-	Node getParent() {
-		
+	private int color;
+	private Node parent;
+	private Node left;
+	private Node right;
+	private int key;
+	private int p;
+	private int val;
+	private int maxVal;
+	private Endpoint endpoint;
+	private Endpoint emax;
+	
+	public Node getParent() {
+		return this.parent;
 	}
 	
-	Node getLeft() {
-		
+	public Node getLeft() {
+		return this.left;
 	}
 	
-	Node getRight() {
-		
+	public Node getRight() {
+		return this.right;
 	}
 	
-	int getKey() {
-		
-		return 0;
+	public int getKey() {
+		return this.key;
 	}
 	
-	int getP() {
-		
-		return 0;
+	public int getP() {
+		return this.p;
 	}
 	
-	int getVal() {
-		
-		return 0;
+	public int getVal() {
+		return this.val;
 	}
 	
-	int getMaxVal() {
-		
-		return 0;
+	public int getMaxVal() {
+		return this.maxVal;
 	}
 	
-	Endpoint getEndpoint() {
-		
+	public Endpoint getEndpoint() {
+		return this.endpoint;
 	}
 	
-	Endpoint getEmax() {
-		
+	public Endpoint getEmax() {
+		return this.emax;
 	}
 	
-	int getColor() {
-		
-		return 0;
+	public int getColor() {
+		return this.color;
 	}
-	
 }
