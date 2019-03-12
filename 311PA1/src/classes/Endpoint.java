@@ -10,6 +10,6 @@ public class Endpoint {
 
 	public int getValue() {
 		
-		return this.value; //No errors
+		return this.value;
 	}
 }
