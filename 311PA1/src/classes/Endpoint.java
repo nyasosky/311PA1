@@ -1,9 +1,15 @@
 package classes;
 
 public class Endpoint {
-
-	int getValue() {
+	
+	private int value;
+	
+	public Endpoint() {
 		
-		return 0; //No errors
+	}
+
+	public int getValue() {
+		
+		return this.value; //No errors
 	}
 }
