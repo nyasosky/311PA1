@@ -9,8 +9,11 @@ public class RBTree {
 	private int size;
 	
 	public RBTree() {
-		root = null;
-		sentinel = null;
+		root = new Node();
+		sentinel = new Node();
+		sentinel.setColor(0);
+		root = sentinel;
+		root.setParent(sentinel);
 		size = 0;
 	}
 	
@@ -60,6 +63,8 @@ public class RBTree {
 		if (y == this.getNILNode()) {
 			this.setRoot(z);
 			z.setColor(0);
+			z.setLeft(this.getNILNode());
+			z.setRight(this.getNILNode());
 			return;
 		}
 		else if (z.getKey() < y.getKey()) {
@@ -96,7 +101,7 @@ public class RBTree {
 			}
 			else {
 				Node y = new Node();
-				y = z.getParent().getParent().getRight();
+				y = z.getParent().getParent().getLeft();
 				if (y.getColor() == 1) {
 					z.getParent().setColor(0);
 					y.setColor(0);
@@ -104,7 +109,7 @@ public class RBTree {
 					z = z.getParent().getParent();
 				}
 				else {
-					if (z == z.getParent().getRight()) {
+					if (z == z.getParent().getLeft()) {
 						z = z.getParent();
 						RightRotate(z);
 					}
@@ -121,11 +126,11 @@ public class RBTree {
 		Node y = new Node();
 		y = x.getRight();
 		x.setRight(y.getLeft());
-		if (y.getLeft() != null) {
+		if (y.getLeft() != this.getNILNode()) {
 			y.getLeft().setParent(x);
 		}
 		y.setParent(x.getParent());
-		if (x.getParent() == null) {
+		if (x.getParent() == this.getNILNode()) {
 			this.setRoot(y);
 		}
 		else if (x == x.getParent().getLeft()) {
@@ -142,11 +147,11 @@ public class RBTree {
 		Node y = new Node();
 		y = x.getLeft();
 		x.setLeft(y.getRight());
-		if (y.getRight() != null) {
+		if (y.getRight() != this.getNILNode()) {
 			y.getRight().setParent(x);
 		}
 		y.setParent(x.getParent());
-		if (x.getParent() == null) {
+		if (x.getParent() == this.getNILNode()) {
 			this.setRoot(y);
 		}
 		else if (x == x.getParent().getLeft()) {
@@ -160,11 +165,11 @@ public class RBTree {
 	}
 	//For testing purposes
 	public void InOrderTraversal(Node z) {
-		if (z == null) {
+		if (z == this.getNILNode()) {
 			return;
 		}
 		InOrderTraversal(z.getLeft());
-		System.out.println(z.getKey() + " " + z.getLeft() + "  " + z.getParent() + " " + z.getRight());
+		System.out.println(z.getKey() + " " + "Left: " + z.getLeft().getKey() + "  " + "Parent: " + z.getParent().getKey() + " " +"Right: "  + z.getRight().getKey() + " Color: " + z.getColor());
 		InOrderTraversal(z.getRight());
 	}
 	
