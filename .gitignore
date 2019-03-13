@@ -12,6 +12,8 @@ local.properties
 .recommenders/
 .project
 .classpath
+*.iml
+.idea/
 
 # External tool builders
 .externalToolBuilders/
