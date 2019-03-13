@@ -22,7 +22,7 @@ public class Intervals {
 	}
 	
 	RBTree getRBTree() {
-		
+		return new RBTree();
 	}
 	
 }
