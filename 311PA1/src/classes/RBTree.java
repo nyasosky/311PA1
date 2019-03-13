@@ -158,5 +158,14 @@ public class RBTree {
 		y.setRight(x);
 		x.setParent(y);
 	}
-
+	//For testing purposes
+	public void InOrderTraversal(Node z) {
+		if (z == null) {
+			return;
+		}
+		InOrderTraversal(z.getLeft());
+		System.out.println(z.getKey() + " " + z.getLeft() + "  " + z.getParent() + " " + z.getRight());
+		InOrderTraversal(z.getRight());
+	}
+	
 }
