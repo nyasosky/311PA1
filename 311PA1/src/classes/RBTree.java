@@ -1,7 +1,5 @@
 package classes;
 
-import java.lang.Math;
-
 public class RBTree {
 	
 	private Node root;
@@ -39,8 +37,22 @@ public class RBTree {
 	}
 	
 	public int getHeight() {
-		
-		return (int) Math.floor(Math.log(this.getSize())/Math.log(2));
+		if (root == sentinel) {
+			return 0;
+		}
+		return getHeight(root);
+	}
+
+	public int getHeight(Node n) {
+		if (n == sentinel) {
+			return 0;
+		}
+		int leftHeight = getHeight(n.getLeft()) + 1;
+		int rightHeight = getHeight(n.getRight()) + 1;
+		if (leftHeight > rightHeight) {
+			return leftHeight;
+		}
+		return rightHeight;
 	}
 	
 	public void RBInsert(Node z) {
