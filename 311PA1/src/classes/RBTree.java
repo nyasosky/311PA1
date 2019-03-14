@@ -181,7 +181,16 @@ public class RBTree {
 			return;
 		}
 		InOrderTraversal(z.getLeft());
-		System.out.println(z.getKey() + " " + "Left: " + z.getLeft().getKey() + "  " + "Parent: " + z.getParent().getKey() + " " +"Right: "  + z.getRight().getKey() + " Color: " + z.getColor());
+		System.out.print("Key: " + z.getKey() + "  Parent: " + z.getParent().getKey() + " Color: " + z.getColor());
+		if (z.getLeft().getP() == 0)
+			System.out.print(" Left: Nil Node");
+		else
+			System.out.print(" Left: " + z.getLeft().getKey());
+		if (z.getRight().getP() == 0)
+			System.out.println(" Right: Nil Node");
+		else
+			System.out.println(" Right: " + z.getRight().getKey());
+		System.out.println("\tP: " + z.getP() + " Val: " + z.getVal());
 		InOrderTraversal(z.getRight());
 	}
 	
