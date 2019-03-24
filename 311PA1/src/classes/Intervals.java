@@ -1,46 +1,45 @@
 package classes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Intervals {
-	
-	RBTree t = new RBTree();
-	private int[][] list = new int[5][5]; //used for testing
+
+	RBTree rbTree;
+	private List<Endpoint[]> intervalList; // used for testing
 
 	public Intervals() {
-		t = new RBTree();
-		list[0][0] = 1;
+		rbTree = new RBTree();
+		intervalList = new ArrayList<Endpoint[]>();
 	}
-	
-	void intervalInsert(int a, int b) {
-		Endpoint left = new Endpoint(a, -1);
-		Node x = new Node();
-		x.setEndpoint(left);
-		x.setKey(left.getValue());
-		Endpoint right = new Endpoint(b, 1);
-		Node y = new Node();
-		y.setEndpoint(right);
-		y.setKey(right.getValue());
-		
+
+	public void intervalInsert(int a, int b) {
+		Endpoint left = new Endpoint(a, 1);
+		Node x = new Node(left);
+		Endpoint right = new Endpoint(b, -1);
+		Node y = new Node(right);
+		Endpoint[] newInterval = { left, right };
+		intervalList.add(newInterval);
 		this.getRBTree().RBInsert(x);
 		this.getRBTree().RBInsert(y);
-			}
-	
-	//This method is optional
-	boolean intervalDelete(int intervalID) {
-		
-		return false; //Return false for the purpose of no errors
 	}
-	
-	int findPOM() {
-		
-		return 0; //Return 0 for the purpose of no errors
+
+	// This method is optional
+	public boolean intervalDelete(int intervalID) {
+
+		return false; // Return false for the purpose of no errors
 	}
-	
-	RBTree getRBTree() {
-		return new RBTree();
+
+	public int findPOM() {
+		return rbTree.getRoot().getEmax().getValue(); // Return 0 for the purpose of no errors
 	}
-	
-	int[][] getList(){ //used for testing
-		return this.list;
+
+	public RBTree getRBTree() {
+		return rbTree;
 	}
-	
+
+	public List<Endpoint[]> getList() { // used for testing
+		return this.intervalList;
+	}
+
 }

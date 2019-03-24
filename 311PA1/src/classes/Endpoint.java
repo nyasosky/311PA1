@@ -1,7 +1,7 @@
 package classes;
 
 public class Endpoint {
-	
+
 	private int value;
 	private int p;
 
