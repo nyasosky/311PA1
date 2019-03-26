@@ -221,8 +221,7 @@ public class RBTree {
 			}
 			else if(x.getMaxVal() == (x.getLeft().getVal() + x.getP())){
 				x.setEmax(x.getEndpoint());
-			}
-			else if(x.getLeft().getEmax() != this.getNILNode().getEmax() && x.getMaxVal() == (x.getLeft().getVal() + x.getP() + x.getRight().getMaxVal())) {
+			} else if (x.getRight().getEmax() != this.getNILNode().getEmax() && x.getMaxVal() == (x.getLeft().getVal() + x.getP() + x.getRight().getMaxVal())) {
 				x.setEmax(x.getRight().getEmax());
 			}
 			else {
