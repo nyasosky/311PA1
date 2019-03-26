@@ -39,4 +39,19 @@ class TestCases {
 		System.out.println(n.getParent() + " " + parent.getColor() + " " + n.getParent().getKey());
 		assertTrue(true);
 	}
+	
+	@Test
+	void RBTreeIntervalOverlap() {
+		Intervals intervalTest = new Intervals();
+		intervalTest.intervalInsert(0, 4);
+		intervalTest.intervalInsert(1, 6);
+		intervalTest.intervalInsert(1, 6);
+		intervalTest.intervalInsert(3, 9);
+		intervalTest.intervalInsert(7, 11);
+		intervalTest.intervalInsert(7, 11);
+		RBTree t = intervalTest.getRBTree();
+		System.out.println("Size: " + t.getSize() + " Height: " + t.getHeight());
+		t.InOrderTraversal(t.getRoot());
+		assertEquals(3, intervalTest.findPOM());
+	}
 }

@@ -232,4 +232,116 @@ public class RBTree {
 		}
 	}
 	
+	private void RBTransplant(Node u, Node v) {
+		if (u.getParent() == this.getNILNode()) {
+			this.root = v;
+		}
+		else if (u == u.getParent().getLeft()) {
+			u.getParent().setLeft(v);
+		}
+		else {
+			u.getParent().setRight(v);
+		}
+		v.setParent(u.getParent());
+	}
+	
+	public void RBDeletion(Node z) {
+		Node y = z;
+		Node x;
+		int yOC = y.getColor();
+		if (z.getLeft() == this.getNILNode()) {
+			x = z.getRight();
+			RBTransplant(z, z.getRight());
+		}
+		else if (z.getRight() == this.getNILNode()) {
+			x = z.getLeft();
+			RBTransplant(z, z.getLeft());
+		}
+		else {
+			y = Minimum(z.getRight());
+			yOC = y.getColor();
+			x = y.getRight();
+			if (y.getParent() == z) {
+				x.setParent(y);
+			}
+			else {
+				RBTransplant(y, y.getRight());
+				y.setRight(z.getRight());
+				y.getRight().setParent(y);
+			}
+			RBTransplant(z, y);
+			y.setLeft(z.getLeft());
+			y.getLeft().setParent(y);
+			y.setColor(z.getColor());
+			if (yOC == 1) {
+				RBDeleteFixup(x);
+			}
+		}
+	}
+	
+	private void RBDeleteFixup(Node x) {
+		while (x != this.getNILNode() && x.getColor() == 1) {
+			if (x == x.getParent().getLeft()) {
+				Node w = x.getParent().getRight();
+				if (w.getColor() == 0) {
+					w.setColor(1);
+					x.getParent().setColor(0);
+					LeftRotate(x.getParent());
+					w = x.getParent().getRight();
+				}
+				if (w.getLeft().getColor() == 1 && w.getRight().getColor() == 1) {
+					w.setColor(0);
+					x = x.getParent();
+				}
+				else {
+					if (w.getRight().getColor() == 1) {
+						w.getLeft().setColor(1);
+						w.setColor(0);
+						RightRotate(w);
+						w = x.getParent().getRight();
+					}
+					w.setColor(x.getParent().getColor());
+					x.getParent().setColor(1);
+					w.getRight().setColor(1);
+					LeftRotate(x.getParent());
+					x = this.getRoot();
+				}
+			}
+			else {
+				Node w = x.getParent().getLeft();
+				if (w.getColor() == 0) {
+					w.setColor(1);
+					x.getParent().setColor(0);
+					RightRotate(x.getParent());
+					w = x.getParent().getLeft();
+				}
+				if (w.getLeft().getColor() == 1 && w.getRight().getColor() == 1) {
+					w.setColor(0);
+					x = x.getParent();
+				}
+				else {
+					if (w.getLeft().getColor() == 1) {
+						w.getRight().setColor(1);
+						w.setColor(0);
+						LeftRotate(w);
+						w = x.getParent().getLeft();
+					}
+					w.setColor(x.getParent().getColor());
+					x.getParent().setColor(1);
+					w.getLeft().setColor(1);
+					RightRotate(x.getParent());
+					x = this.getRoot();
+				}
+			}
+		}
+		x.setColor(1);
+	}
+	
+	private Node Minimum(Node x) {
+		Node z = x;
+		while (z.getLeft() != this.getNILNode()) {
+			z = z.getLeft();
+		}
+		return z;
+	}
 }
