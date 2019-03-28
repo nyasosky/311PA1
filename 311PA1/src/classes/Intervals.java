@@ -26,14 +26,18 @@ public class Intervals {
 
 	// This method is optional
 	public boolean intervalDelete(int intervalID) {
-		Endpoint[] e = intervalList.get(intervalID);
-		Node x = new Node(e[0]);
-		Node y = new Node(e[1]);
-		
-		Node z = this.getRBTree().getRoot();
-		this.getRBTree().InOrderDeletion(z, x, y);
+        if (intervalID < 1 || intervalID > intervalList.size() + 1) {
+            System.out.println("Invalid interval ID please try again");
+            return false;
+        }
+        Endpoint[] e = intervalList.get(intervalID - 1);
+        Node x = new Node(e[0]);
+        Node y = new Node(e[1]);
 
-		return true; // Return false for the purpose of no errors
+        Node z = this.getRBTree().getRoot();
+        this.getRBTree().InOrderDeletion(z, x, y);
+
+        return true; // Return false for the purpose of no errors
 	}
 
 	public int findPOM() {
