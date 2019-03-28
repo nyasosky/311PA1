@@ -334,6 +334,7 @@ public class RBTree {
 			}
 		}
 		x.setColor(1);
+		updateNodeValues(x);
 	}
 	
 	private Node Minimum(Node x) {
@@ -342,5 +343,21 @@ public class RBTree {
 			z = z.getLeft();
 		}
 		return z;
+	}
+
+	public void InOrderDeletion(Node z, Node x, Node y) {
+		if (z == this.getNILNode()) {
+			return;
+		}
+		if (z.getEndpoint() == x.getEndpoint()) {
+			this.RBDeletion(z);
+			//updateNodeValues(x.getParent());
+		}
+		if (z.getEndpoint() == y.getEndpoint()) {
+			this.RBDeletion(z);
+			//updateNodeValues(y.getParent());
+		}
+		this.InOrderDeletion(z.getLeft(), x, y);
+		this.InOrderDeletion(z.getRight(), x, y);
 	}
 }
