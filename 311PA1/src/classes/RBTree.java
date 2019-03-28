@@ -362,7 +362,7 @@ public class RBTree {
 	}
 	
 	public Node search(Node x, Node k) {
-		if (x == this.getNILNode() || k.getEndpoint() == x.getEndpoint()) {
+        if (x == this.getNILNode() || (k.getP() == x.getP() && k.getKey() == x.getKey())) {
 			return x;
 		}
 		if (k.getKey() < x.getKey()) {

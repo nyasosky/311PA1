@@ -37,11 +37,11 @@ public class Intervals {
         Node root = this.getRBTree().getRoot();
         
         Node toDelete = this.getRBTree().search(root, left);
-        if (toDelete != this.getRBTree().getNILNode()) {
+		if (toDelete.getP() != 0) {
         	this.getRBTree().RBDeletion(toDelete);
         }
         toDelete = this.getRBTree().search(root, right);
-        if (toDelete != this.getRBTree().getNILNode()) {
+		if (toDelete.getP() != 0) {
         	this.getRBTree().RBDeletion(toDelete);
         }
         
