@@ -60,6 +60,7 @@ class TestCases {
 		Intervals intervalTest = new Intervals();
 		intervalTest.intervalInsert(1, 5);
 		intervalTest.intervalInsert(3, 6);
+		intervalTest.intervalInsert(1, 5);
 		intervalTest.getRBTree().InOrderTraversal(intervalTest.getRBTree().getRoot());
 		System.out.println();
 		System.out.println();

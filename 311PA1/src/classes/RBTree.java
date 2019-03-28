@@ -360,4 +360,16 @@ public class RBTree {
 		this.InOrderDeletion(z.getLeft(), x, y);
 		this.InOrderDeletion(z.getRight(), x, y);
 	}
+	
+	public Node search(Node x, Node k) {
+		if (x == this.getNILNode() || k.getEndpoint() == x.getEndpoint()) {
+			return x;
+		}
+		if (k.getKey() < x.getKey()) {
+			return search(x.getLeft(), k);
+		}
+		else {
+			return search(x.getRight(), k);
+		}
+	}
 }

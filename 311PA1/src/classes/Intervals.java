@@ -31,11 +31,21 @@ public class Intervals {
             return false;
         }
         Endpoint[] e = intervalList.get(intervalID - 1);
-        Node x = new Node(e[0]);
-        Node y = new Node(e[1]);
+        Node left = new Node(e[0]);
+        Node right = new Node(e[1]);
 
-        Node z = this.getRBTree().getRoot();
-        this.getRBTree().InOrderDeletion(z, x, y);
+        Node root = this.getRBTree().getRoot();
+        
+        Node toDelete = this.getRBTree().search(root, left);
+        if (toDelete != this.getRBTree().getNILNode()) {
+        	this.getRBTree().RBDeletion(toDelete);
+        }
+        toDelete = this.getRBTree().search(root, right);
+        if (toDelete != this.getRBTree().getNILNode()) {
+        	this.getRBTree().RBDeletion(toDelete);
+        }
+        
+        //this.getRBTree().InOrderDeletion(z, x, y);
 
         return true; // Return false for the purpose of no errors
 	}
