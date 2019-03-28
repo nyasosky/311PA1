@@ -26,8 +26,14 @@ public class Intervals {
 
 	// This method is optional
 	public boolean intervalDelete(int intervalID) {
+		Endpoint[] e = intervalList.get(intervalID);
+		Node x = new Node(e[0]);
+		Node y = new Node(e[1]);
+		
+		Node z = this.getRBTree().getRoot();
+		this.getRBTree().InOrderDeletion(z, x, y);
 
-		return false; // Return false for the purpose of no errors
+		return true; // Return false for the purpose of no errors
 	}
 
 	public int findPOM() {

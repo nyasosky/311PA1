@@ -54,4 +54,17 @@ class TestCases {
 		t.InOrderTraversal(t.getRoot());
 		assertEquals(3, intervalTest.findPOM());
 	}
+	
+	@Test
+	void Delete1() {
+		Intervals intervalTest = new Intervals();
+		intervalTest.intervalInsert(1, 5);
+		intervalTest.intervalInsert(3, 6);
+		intervalTest.getRBTree().InOrderTraversal(intervalTest.getRBTree().getRoot());
+		System.out.println();
+		System.out.println();
+		intervalTest.intervalDelete(1);
+		intervalTest.getRBTree().InOrderTraversal(intervalTest.getRBTree().getRoot());
+		
+	}
 }
