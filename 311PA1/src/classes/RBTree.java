@@ -1,11 +1,31 @@
 package classes;
 
+/**
+ * Class for building and maintaing a Red Black Tree
+ * @author Ryan Connolly and Nathan Yasosky
+ *
+ */
 public class RBTree {
 	
+	/**
+	 * Root node of the tree
+	 */
 	private Node root;
+	
+	/**
+	 * Nil node
+	 */
 	private Node sentinel;
+	
+	/**
+	 * Number of nodes in the RBT
+	 */
 	private int size;
 	
+	/**
+	 * Constructor for a Red Black Tree
+	 * Each instance of a Red Black Tree will have a root, sentinel, and size
+	 */
 	public RBTree() {
 		root = new Node();
 		sentinel = new Node();
@@ -16,27 +36,51 @@ public class RBTree {
 		size = 0;
 	}
 	
+	/**
+	 * Method for getting the root node of a RBT
+	 * @return the root of the Red Black Tree
+	 */
 	public Node getRoot() {
 		return this.root;
 	}
 	
+	/**
+	 * Method for setting the root node in a RBT
+	 * @param n A node object
+	 */
 	public void setRoot(Node n) {
 		this.root = n;
 	}
 	
+	/**
+	 * Method for getting the sentinel or nil node for a RBT
+	 * @return the nil node in the RBT
+	 */
 	public Node getNILNode() {
 		return this.sentinel;
 	}
 	
+	/**
+	 * Method for getting the size or number of nodes in a RBT
+	 * @return integer value of number of nodes in the RBT
+	 */
 	public int getSize() {
 	
 		return this.size;
 	}
 	
+	/**
+	 * Method for setting the number of nodes in a RBT
+	 * @param size Number of nodes in the RBT
+	 */
 	public void setSize(int size) {
 		this.size = size;
 	}
 	
+	/**
+	 * Method for finding how many levels tall a RBT is
+	 * @return Integer value representing how many levels tall a RBT is
+	 */
 	public int getHeight() {
 		if (root == sentinel) {
 			return 0;
@@ -44,6 +88,11 @@ public class RBTree {
 		return getHeight(root);
 	}
 
+	/**
+	 * Method for finding how many levels tall a RBT is
+	 * @param n Used to find the height up to Node n
+	 * @return Integer value representing how many levels tall a RBT is
+	 */
 	private int getHeight(Node n) {
 		if (n == sentinel) {
 			return 0;
@@ -56,6 +105,11 @@ public class RBTree {
 		return rightHeight;
 	}
 	
+	/**
+	 * Method for inserting a node into a RBT
+	 * It will then call for node values to be updated and RBT to be fixed up
+	 * @param z Node to be inserted
+	 */
 	public void RBInsert(Node z) {
 		this.setSize(this.getSize() + 1);
 		Node y = new Node();
@@ -92,6 +146,10 @@ public class RBTree {
 		RBInsertFixup(z);
 	}
 	
+	/**
+	 * Method for keeping the RBT true to all of the necessary properties for a RBT
+	 * @param z Node to be fixed up
+	 */
 	public void RBInsertFixup(Node z) {
 		while (z.getParent().getColor() == 0) {
 			if (z.getParent() == z.getParent().getParent().getLeft()) {
@@ -136,6 +194,10 @@ public class RBTree {
 		this.getRoot().setColor(1);
 	}
 	
+	/**
+	 * Rotates the nodes around the node x to the left
+	 * @param x Node used to determine where the rotation takes place
+	 */
 	public void LeftRotate(Node x) {
 		Node y = new Node();
 		y = x.getRight();
@@ -158,6 +220,10 @@ public class RBTree {
 		updateNodeValues(x);
 	}
 	
+	/**
+	 * Method for rotating nodes around node x to the right
+	 * @param x Node used to determine where the rotation takes place
+	 */
 	public void RightRotate(Node x) {
 		Node y = new Node();
 		y = x.getLeft();
@@ -206,6 +272,10 @@ public class RBTree {
 		InOrderTraversal(z.getRight());
 	}
 	
+	/**
+	 * Method used for updating the emax values of a node when a new node is inserted or deleted
+	 * @param x Used as the starting node and travels up the tree through recursive calls
+	 */
 	private void updateNodeValues(Node x) {
 		if(x == this.getNILNode()) {
 			x.setVal(0);
@@ -231,6 +301,11 @@ public class RBTree {
 		}
 	}
 	
+	/**
+	 * Method for shifting a subtree into a specified node position
+	 * @param u Position node
+	 * @param v Node to get the subtree that will move
+	 */
 	private void RBTransplant(Node u, Node v) {
 		if (u.getParent() == this.getNILNode()) {
 			this.root = v;
@@ -244,6 +319,11 @@ public class RBTree {
 		v.setParent(u.getParent());
 	}
 	
+	/**
+	 * Method used for deleting a node from an RBT
+	 * It will fixup the tree and transplant nodes when needed
+	 * @param z Node to be deleted
+	 */
 	public void RBDeletion(Node z) {
 		Node y = z;
 		Node x;
@@ -251,10 +331,12 @@ public class RBTree {
 		if (z.getLeft() == this.getNILNode()) {
 			x = z.getRight();
 			RBTransplant(z, z.getRight());
+			updateNodeValues(x.getParent());
 		}
 		else if (z.getRight() == this.getNILNode()) {
 			x = z.getLeft();
 			RBTransplant(z, z.getLeft());
+			updateNodeValues(x.getParent());
 		}
 		else {
 			y = Minimum(z.getRight());
@@ -272,12 +354,18 @@ public class RBTree {
 			y.setLeft(z.getLeft());
 			y.getLeft().setParent(y);
 			y.setColor(z.getColor());
+			updateNodeValues(x);
 			if (yOC == 1) {
 				RBDeleteFixup(x);
 			}
 		}
+		//updateNodeValues(x);
 	}
 	
+	/**
+	 * Method for fixing the RBT after deletion so that it holds the properties of a RBT
+	 * @param x Node to be fixed up
+	 */
 	private void RBDeleteFixup(Node x) {
 		while (x != this.getNILNode() && x.getColor() == 1) {
 			if (x == x.getParent().getLeft()) {
@@ -334,9 +422,13 @@ public class RBTree {
 			}
 		}
 		x.setColor(1);
-		updateNodeValues(x);
 	}
 	
+	/**
+	 * Method for finding the minimum node in a subtree
+	 * @param x Node to start at
+	 * @return The leftmost Node starting from node x
+	 */
 	private Node Minimum(Node x) {
 		Node z = x;
 		while (z.getLeft() != this.getNILNode()) {
@@ -361,6 +453,12 @@ public class RBTree {
 		this.InOrderDeletion(z.getRight(), x, y);
 	}
 	
+	/**
+	 * Method for searching through a RBT for a specific Node
+	 * @param x Node to start at (normally the root)
+	 * @param k Node being searched for
+	 * @return If the node is found it will return it
+	 */
 	public Node search(Node x, Node k) {
 		if (x == this.getNILNode() || k.getEndpoint() == x.getEndpoint()) {
 			return x;
