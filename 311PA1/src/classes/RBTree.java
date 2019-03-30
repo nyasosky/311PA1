@@ -463,10 +463,7 @@ public class RBTree {
 		if (x == this.getNILNode() || k.getEndpoint() == x.getEndpoint()) {
 			return x;
 		}
-		if (k.getKey() < x.getKey()) {
-			return search(x.getLeft(), k);
-		}
-		if (k.getKey() == x.getKey()) {
+		if (k.getKey() <= x.getKey()) {
 			return search(x.getLeft(), k);
 		}
 		else {
