@@ -17,6 +17,9 @@ public class Endpoint {
 	 */
 	private int p;
 	
+	/**
+	 * Reference to the node that the endpoint is associated with
+	 */
 	private Node node;
 
 	/**
@@ -28,6 +31,7 @@ public class Endpoint {
 	public Endpoint(int value, int p) {
 		this.value = value;
 		this.p = p;
+		this.node = null;
 	}
 
 	/**
@@ -46,10 +50,18 @@ public class Endpoint {
 		return this.p;
 	}
 	
+	/**
+	 * Method for getting the node that the endpoint is associated with 
+	 * @return The node that the endpoint is associated with
+	 */
 	public Node getNode() {
 		return this.node;
 	}
 	
+	/**
+	 * Method to set the node reference
+	 * @param n The reference node
+	 */
 	public void setNode(Node n) {
 		this.node = n;
 	}
