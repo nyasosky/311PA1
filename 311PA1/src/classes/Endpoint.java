@@ -16,6 +16,8 @@ public class Endpoint {
 	 * Value to determine if the endpoint is a left or right endpoint, 1 for left, -1 for right
 	 */
 	private int p;
+	
+	private Node node;
 
 	/**
 	 * Constructor for an endpoint object
@@ -42,5 +44,13 @@ public class Endpoint {
 	 */
 	public int getP() {
 		return this.p;
+	}
+	
+	public Node getNode() {
+		return this.node;
+	}
+	
+	public void setNode(Node n) {
+		this.node = n;
 	}
 }

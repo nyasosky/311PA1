@@ -68,4 +68,21 @@ class TestCases {
 		intervalTest.getRBTree().InOrderTraversal(intervalTest.getRBTree().getRoot());
 
 	}
+	
+	@Test
+	void Delete2() {
+		Intervals it = new Intervals();
+		it.intervalInsert(2, 8);
+		it.intervalInsert(1, 4);
+		it.intervalInsert(3, 4);
+		it.intervalInsert(5, 7);
+		it.intervalInsert(7, 9);
+		it.intervalInsert(3, 7);
+		it.intervalInsert(2, 5);
+		it.getRBTree().InOrderTraversal(it.getRBTree().getRoot());
+		System.out.println();
+		System.out.println();
+		it.intervalDelete(3);
+		it.getRBTree().InOrderTraversal(it.getRBTree().getRoot());
+	}
 }

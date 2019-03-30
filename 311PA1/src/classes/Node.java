@@ -60,6 +60,7 @@ public class Node {
 		val = 0;
 		maxVal = 0;
 		endpoint = new Endpoint(0, 0);
+		this.endpoint.setNode(this);
 		emax = new Endpoint(0,0);
 	}
 
@@ -75,6 +76,7 @@ public class Node {
 		val = 0;
 		maxVal = 0;
 		this.endpoint = endpoint;
+		this.endpoint.setNode(this);
 		emax = endpoint;
 	}
 
@@ -204,6 +206,7 @@ public class Node {
 	 */
 	public void setEndpoint(Endpoint endpoint) {
 		this.endpoint = endpoint;
+		this.endpoint.setNode(this);
 	}
 
 	/**

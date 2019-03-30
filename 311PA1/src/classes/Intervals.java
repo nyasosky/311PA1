@@ -62,21 +62,9 @@ public class Intervals {
             return false;
         }
         Endpoint[] e = intervalList.get(intervalID - 1);
-        Node left = new Node(e[0]);
-        Node right = new Node(e[1]);
 
-        Node root = this.getRBTree().getRoot();
-        
-        Node toDelete = this.getRBTree().search(root, left);
-        if (toDelete != this.getRBTree().getNILNode()) {
-        	this.getRBTree().RBDeletion(toDelete);
-        }
-        toDelete = this.getRBTree().search(root, right);
-        if (toDelete != this.getRBTree().getNILNode()) {
-        	this.getRBTree().RBDeletion(toDelete);
-        }
-        
-        //this.getRBTree().InOrderDeletion(z, x, y);
+        this.getRBTree().RBDeletion(e[0].getNode());
+        this.getRBTree().RBDeletion(e[1].getNode());
 
         return true; // Return false for the purpose of no errors
 	}
