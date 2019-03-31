@@ -82,7 +82,7 @@ class TestCases {
 		it.getRBTree().InOrderTraversal(it.getRBTree().getRoot());
 		System.out.println();
 		System.out.println();
-		it.intervalDelete(3);
+		it.intervalDelete(6);
 		it.getRBTree().InOrderTraversal(it.getRBTree().getRoot());
 	}
 }

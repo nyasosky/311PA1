@@ -333,6 +333,7 @@ public class RBTree {
 	public void RBDeletion(Node z) {
 		Node y = z;
 		Node x;
+		this.setSize(this.getSize() - 1);
 		int yOC = y.getColor();
 		if (z.getLeft() == this.getNILNode()) {
 			x = z.getRight();
@@ -360,7 +361,7 @@ public class RBTree {
 			y.setLeft(z.getLeft());
 			y.getLeft().setParent(y);
 			y.setColor(z.getColor());
-			updateNodeValues(x);
+			updateNodeValues(y);
 			if (yOC == 1) {
 				RBDeleteFixup(x);
 			}
