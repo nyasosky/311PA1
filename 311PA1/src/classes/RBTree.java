@@ -442,22 +442,4 @@ public class RBTree {
 		}
 		return z;
 	}
-	
-	/**
-	 * Method for searching through a RBT for a specific Node
-	 * @param x Node to start at (normally the root)
-	 * @param k Node being searched for
-	 * @return If the node is found it will return it
-	 */
-	public Node search(Node x, Node k) {
-		if (x == this.getNILNode() || k.getEndpoint() == x.getEndpoint()) {
-			return x;
-		}
-		if (k.getKey() <= x.getKey()) {
-			return search(x.getLeft(), k);
-		}
-		else {
-			return search(x.getRight(), k);
-		}
-	}
 }
