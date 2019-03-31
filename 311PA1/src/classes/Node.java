@@ -18,7 +18,7 @@ public class Node {
 	private int val;
 	
 	/**
-	 * Max value in the subtree of the node
+	 * Max sum of p values from a node and its subtrees
 	 */
 	private int maxVal;
 	
@@ -43,14 +43,14 @@ public class Node {
 	private Endpoint endpoint;
 	
 	/**
-	 * Endpoint with the largest value
+	 * Endpoint with the most overlap from a node and its subtrees
 	 */
 	private Endpoint emax;
 
 	/**
 	 * Constructor for a node object
 	 * Each node will have a color, parent node, left child node, right child node,
-	 * a value, a maximum value in its subtree, an endpoint associated with the node, and a max endpoint in the subtree
+	 * a value, a maximum value, an endpoint associated with the node, and a max overlap endpoint
 	 */
 	public Node() {
 		color = 0;

@@ -1,7 +1,7 @@
 package classes;
 
 /**
- * Class for building and maintaing a Red Black Tree
+ * Class for building and maintaining a Red Black Tree
  * @author Ryan Connolly and Nathan Yasosky
  *
  */
@@ -61,7 +61,7 @@ public class RBTree {
 	}
 	
 	/**
-	 * Method for getting the size or number of nodes in a RBT
+	 * Method for getting the size or number of internal nodes in a RBT
 	 * @return integer value of number of nodes in the RBT
 	 */
 	public int getSize() {
@@ -70,7 +70,7 @@ public class RBTree {
 	}
 	
 	/**
-	 * Method for setting the number of nodes in a RBT
+	 * Method for setting the number of internal nodes in a RBT
 	 * @param size Number of nodes in the RBT
 	 */
 	public void setSize(int size) {
@@ -245,7 +245,13 @@ public class RBTree {
 		x.setParent(y);
 		updateNodeValues(x);
 	}
-	//For testing purposes
+
+	/**
+	 * This method is used for testing and it will traverse through the tree in order,
+	 * and it will print out everything about the node, just so we can see our code is working correctly
+	 *
+	 * @param z is the root of the tree that we would like to see
+	 */
 	public void InOrderTraversal(Node z) {
 		if (z == this.getNILNode()) {
 			return;
@@ -271,9 +277,9 @@ public class RBTree {
 			System.out.println(" Emax: " + z.getEmax().getValue());
 		InOrderTraversal(z.getRight());
 	}
-	
+
 	/**
-	 * Method used for updating the emax values of a node when a new node is inserted or deleted
+	 * Method used for updating the emax, val, and maxval values of a node when a new node is inserted or deleted
 	 * @param x Used as the starting node and travels up the tree through recursive calls
 	 */
 	private void updateNodeValues(Node x) {
@@ -359,7 +365,6 @@ public class RBTree {
 				RBDeleteFixup(x);
 			}
 		}
-		//updateNodeValues(x);
 	}
 	
 	/**
@@ -435,22 +440,6 @@ public class RBTree {
 			z = z.getLeft();
 		}
 		return z;
-	}
-
-	public void InOrderDeletion(Node z, Node x, Node y) {
-		if (z == this.getNILNode()) {
-			return;
-		}
-		if (z.getEndpoint() == x.getEndpoint()) {
-			this.RBDeletion(z);
-			//updateNodeValues(x.getParent());
-		}
-		if (z.getEndpoint() == y.getEndpoint()) {
-			this.RBDeletion(z);
-			//updateNodeValues(y.getParent());
-		}
-		this.InOrderDeletion(z.getLeft(), x, y);
-		this.InOrderDeletion(z.getRight(), x, y);
 	}
 	
 	/**

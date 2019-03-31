@@ -18,7 +18,7 @@ public class Intervals {
 	/**
 	 * List to keep track of intervals added into the RBT
 	 */
-	private List<Endpoint[]> intervalList; // used for testing
+    private List<Endpoint[]> intervalList;
 
 	/**
 	 * Constructor for an Intervals object
@@ -53,8 +53,8 @@ public class Intervals {
 	 * Then nodes are created with the endpoints, and a node is created from the root of the RBT
 	 * Then the tree is searched for the left node first and then it will get deleted if it is not nil
 	 * Then the same process occurs for the right node
-	 * @param intervalID Used as the index in interval list
-	 * @return true
+     * @param intervalID the interval id of the interval you want to delete
+     * @return boolean that will return true if the deletion was successful false otherwise
 	 */
 	public boolean intervalDelete(int intervalID) {
         if (intervalID < 1 || intervalID > intervalList.size() + 1) {
@@ -66,7 +66,7 @@ public class Intervals {
         this.getRBTree().RBDeletion(e[0].getNode());
         this.getRBTree().RBDeletion(e[1].getNode());
 
-        return true; // Return false for the purpose of no errors
+        return true;
 	}
 
 	/**
@@ -74,12 +74,12 @@ public class Intervals {
 	 * @return integer location where there is maximum overlap
 	 */
 	public int findPOM() {
-		return rbTree.getRoot().getEmax().getValue(); // Return 0 for the purpose of no errors
+        return rbTree.getRoot().getEmax().getValue();
 	}
 
 	/**
 	 * Method for getting the RBT associated with the current Intervals object
-	 * @return
+     * @return the RBTree associated with the Intervals
 	 */
 	public RBTree getRBTree() {
 		return rbTree;
@@ -89,7 +89,7 @@ public class Intervals {
 	 * Method for getting the interval list that is associated with the current Intervals object
 	 * @return List of intervals
 	 */
-	public List<Endpoint[]> getList() { // used for testing
+    public List<Endpoint[]> getList() {
 		return this.intervalList;
 	}
 
