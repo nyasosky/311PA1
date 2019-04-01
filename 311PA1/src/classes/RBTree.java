@@ -333,17 +333,22 @@ public class RBTree {
 	public void RBDeletion(Node z) {
 		Node y = z;
 		Node x;
+		Node updateNode;
 		this.setSize(this.getSize() - 1);
 		int yOC = y.getColor();
 		if (z.getLeft() == this.getNILNode()) {
 			x = z.getRight();
 			RBTransplant(z, z.getRight());
-			updateNodeValues(x.getParent());
+			if (x == this.getNILNode()) {
+				updateNode = z.getParent();
+			} else {
+				updateNode = x;
+			}
 		}
 		else if (z.getRight() == this.getNILNode()) {
 			x = z.getLeft();
 			RBTransplant(z, z.getLeft());
-			updateNodeValues(x.getParent());
+			updateNode = x;
 		}
 		else {
 			y = Minimum(z.getRight());
@@ -361,10 +366,11 @@ public class RBTree {
 			y.setLeft(z.getLeft());
 			y.getLeft().setParent(y);
 			y.setColor(z.getColor());
-			updateNodeValues(y);
-			if (yOC == 1) {
-				RBDeleteFixup(x);
-			}
+			updateNode = x;
+		}
+		updateNodeValues(updateNode);
+		if (yOC == 1) {
+			RBDeleteFixup(x);
 		}
 	}
 	
@@ -373,7 +379,7 @@ public class RBTree {
 	 * @param x Node to be fixed up
 	 */
 	private void RBDeleteFixup(Node x) {
-		while (x != this.getNILNode() && x.getColor() == 1) {
+		while (x != this.getRoot() && x.getColor() == 1) {
 			if (x == x.getParent().getLeft()) {
 				Node w = x.getParent().getRight();
 				if (w.getColor() == 0) {

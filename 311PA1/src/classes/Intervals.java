@@ -57,15 +57,19 @@ public class Intervals {
      * @return boolean that will return true if the deletion was successful false otherwise
 	 */
 	public boolean intervalDelete(int intervalID) {
-        if (intervalID < 1 || intervalID > intervalList.size() + 1) {
+        if (intervalID < 1 || intervalID > intervalList.size()) {
             System.out.println("Invalid interval ID please try again");
+            return false;
+        }
+        if (intervalList.get(intervalID - 1) == null) {
+            System.out.println("Interval has already been deleted");
             return false;
         }
         Endpoint[] e = intervalList.get(intervalID - 1);
 
         this.getRBTree().RBDeletion(e[0].getNode());
         this.getRBTree().RBDeletion(e[1].getNode());
-
+        intervalList.set(intervalID - 1, null);
         return true;
 	}
 
