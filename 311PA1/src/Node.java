@@ -45,7 +45,10 @@ public class Node {
 	 */
 	private Endpoint emax;
 
-	private int height;
+    /**
+     * The height of the node's subtree
+     */
+    private int height;
 
 	/**
 	 * Constructor for a node object
@@ -238,8 +241,8 @@ public class Node {
 
 	/**
 	 * method for setting the height of the node's subtree
-	 *
-	 * @param height The endpoint that will be the emax of the node
+     *
+     * @param height The int that will be the height of the node's subtree
 	 */
 	public void setHeight(int height) {
 		this.height = height;
