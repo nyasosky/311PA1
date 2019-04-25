@@ -77,28 +77,10 @@ public class RBTree {
 
 	/**
 	 * Method for finding how many levels tall a RBT is
-	 *
 	 * @return Integer value representing how many levels tall a RBT is
 	 */
 	public int getHeight() {
 		return this.root.getHeight();
-	}
-
-	/**
-	 * Method for finding how many levels tall a RBT is
-	 * @param n Used to find the height up to Node n
-	 * @return Integer value representing how many levels tall a RBT is
-	 */
-	private int getHeightCalc(Node n) {
-		if (n == sentinel) {
-			return 0;
-		}
-		int leftHeight = getHeightCalc(n.getLeft()) + 1;
-		int rightHeight = getHeightCalc(n.getRight()) + 1;
-		if (leftHeight > rightHeight) {
-			return leftHeight;
-		}
-		return rightHeight;
 	}
 	
 	/**
@@ -254,7 +236,6 @@ public class RBTree {
 	/**
 	 * This method is used for testing and it will traverse through the tree in order,
 	 * and it will print out everything about the node, just so we can see our code is working correctly
-	 *
 	 * @param z is the root of the tree that we would like to see
 	 */
 	public void InOrderTraversal(Node z) {
@@ -300,7 +281,7 @@ public class RBTree {
 			x.setHeight(Math.max(x.getLeft().getHeight(), x.getRight().getHeight()) + 1);
 			if(x.getLeft().getEmax() != this.getNILNode().getEmax() && x.getMaxVal() == x.getLeft().getMaxVal()) {
 				x.setEmax(x.getLeft().getEmax());
-			} else if(x.getMaxVal() == (x.getLeft().getVal() + x.getP())){
+			} else if (x.getMaxVal() == (x.getLeft().getVal() + x.getP())) {
 				x.setEmax(x.getEndpoint());
 			} else if (x.getRight().getEmax() != this.getNILNode().getEmax() && x.getMaxVal() == (x.getLeft().getVal() + x.getP() + x.getRight().getMaxVal())) {
 				x.setEmax(x.getRight().getEmax());
