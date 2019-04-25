@@ -19,6 +19,8 @@ public class RBTree {
 	 * Number of nodes in the RBT
 	 */
 	private int size;
+
+	private int height;
 	
 	/**
 	 * Constructor for a Red Black Tree
@@ -32,6 +34,7 @@ public class RBTree {
 		root = sentinel;
 		root.setParent(sentinel);
 		size = 0;
+		height = 0;
 	}
 	
 	/**
@@ -74,16 +77,25 @@ public class RBTree {
 	public void setSize(int size) {
 		this.size = size;
 	}
-	
+
 	/**
-	 * Method for finding how many levels tall a RBT is
+	 * Method for helping find how many levels tall a RBT is
 	 * @return Integer value representing how many levels tall a RBT is
 	 */
-	public int getHeight() {
+	private int getHeightRootCalc() {
 		if (root == sentinel) {
 			return 0;
 		}
-		return getHeight(root);
+		return getHeightCalc(root);
+	}
+
+	/**
+	 * Method for finding how many levels tall a RBT is
+	 *
+	 * @return Integer value representing how many levels tall a RBT is
+	 */
+	public int getHeight() {
+		return height;
 	}
 
 	/**
@@ -91,12 +103,12 @@ public class RBTree {
 	 * @param n Used to find the height up to Node n
 	 * @return Integer value representing how many levels tall a RBT is
 	 */
-	private int getHeight(Node n) {
+	private int getHeightCalc(Node n) {
 		if (n == sentinel) {
 			return 0;
 		}
-		int leftHeight = getHeight(n.getLeft()) + 1;
-		int rightHeight = getHeight(n.getRight()) + 1;
+		int leftHeight = getHeightCalc(n.getLeft()) + 1;
+		int rightHeight = getHeightCalc(n.getRight()) + 1;
 		if (leftHeight > rightHeight) {
 			return leftHeight;
 		}
@@ -119,8 +131,13 @@ public class RBTree {
 			y = x;
 			if (z.getKey() < x.getKey()) {
 				x = x.getLeft();
-			}
-			else {
+			} else if (z.getKey() == x.getKey()) {
+				if (z.getP() >= x.getP()) {
+					x = x.getLeft();
+				} else {
+					x = x.getRight();
+				}
+			} else {
 				x = x.getRight();
 			}
 		}
@@ -131,11 +148,15 @@ public class RBTree {
 			z.setLeft(this.getNILNode());
 			z.setRight(this.getNILNode());
 			return;
-		}
-		else if (z.getKey() < y.getKey()) {
+		} else if (z.getKey() < y.getKey()) {
 			y.setLeft(z);
-		}
-		else {
+		} else if (z.getKey() == y.getKey()) {
+			if (z.getP() >= y.getP()) {
+				y.setLeft(z);
+			} else {
+				y.setRight(z);
+			}
+		} else {
 			y.setRight(z);
 		}
 		z.setLeft(this.getNILNode());
@@ -285,24 +306,22 @@ public class RBTree {
 			x.setVal(0);
 			x.setMaxVal(0);
 			x.setEmax(this.getNILNode().getEmax());
-		}
-		else {
+		} else {
 			x.setVal(x.getLeft().getVal() + x.getP() + x.getRight().getVal());
 			x.setMaxVal(Math.max(x.getLeft().getMaxVal(),
-				Math.max(x.getLeft().getVal() + x.getP(), x.getLeft().getVal() + x.getP() + x.getRight().getMaxVal())));
+					Math.max(x.getLeft().getVal() + x.getP(), x.getLeft().getVal() + x.getP() + x.getRight().getMaxVal())));
 			if(x.getLeft().getEmax() != this.getNILNode().getEmax() && x.getMaxVal() == x.getLeft().getMaxVal()) {
 				x.setEmax(x.getLeft().getEmax());
-			}
-			else if(x.getMaxVal() == (x.getLeft().getVal() + x.getP())){
+			} else if(x.getMaxVal() == (x.getLeft().getVal() + x.getP())){
 				x.setEmax(x.getEndpoint());
 			} else if (x.getRight().getEmax() != this.getNILNode().getEmax() && x.getMaxVal() == (x.getLeft().getVal() + x.getP() + x.getRight().getMaxVal())) {
 				x.setEmax(x.getRight().getEmax());
-			}
-			else {
+			} else {
 				x.setEmax(this.getNILNode().getEndpoint());
 			}
 			updateNodeValues(x.getParent());
 		}
+		this.height = this.getHeightRootCalc();
 	}
 	
 	/**
