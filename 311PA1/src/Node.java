@@ -45,6 +45,8 @@ public class Node {
 	 */
 	private Endpoint emax;
 
+	private int height;
+
 	/**
 	 * Constructor for a node object
 	 * Each node will have a color, parent node, left child node, right child node,
@@ -57,6 +59,7 @@ public class Node {
 		right = null;
 		val = 0;
 		maxVal = 0;
+		height = 0;
 		endpoint = new Endpoint(0, 0);
 		this.endpoint.setNode(this);
 		emax = new Endpoint(0,0);
@@ -73,6 +76,7 @@ public class Node {
 		right = null;
 		val = 0;
 		maxVal = 0;
+		height = 0;
 		this.endpoint = endpoint;
 		this.endpoint.setNode(this);
 		emax = endpoint;
@@ -221,5 +225,23 @@ public class Node {
 	 */
 	public void setEmax(Endpoint emax) {
 		this.emax = emax;
+	}
+
+	/**
+	 * Method for getting the height of the node's subtree
+	 *
+	 * @return The height of the node's subtree
+	 */
+	public int getHeight() {
+		return height;
+	}
+
+	/**
+	 * method for setting the height of the node's subtree
+	 *
+	 * @param height The endpoint that will be the emax of the node
+	 */
+	public void setHeight(int height) {
+		this.height = height;
 	}
 }

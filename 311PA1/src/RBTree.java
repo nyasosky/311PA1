@@ -19,8 +19,6 @@ public class RBTree {
 	 * Number of nodes in the RBT
 	 */
 	private int size;
-
-	private int height;
 	
 	/**
 	 * Constructor for a Red Black Tree
@@ -34,7 +32,6 @@ public class RBTree {
 		root = sentinel;
 		root.setParent(sentinel);
 		size = 0;
-		height = 0;
 	}
 	
 	/**
@@ -79,23 +76,12 @@ public class RBTree {
 	}
 
 	/**
-	 * Method for helping find how many levels tall a RBT is
-	 * @return Integer value representing how many levels tall a RBT is
-	 */
-	private int getHeightRootCalc() {
-		if (root == sentinel) {
-			return 0;
-		}
-		return getHeightCalc(root);
-	}
-
-	/**
 	 * Method for finding how many levels tall a RBT is
 	 *
 	 * @return Integer value representing how many levels tall a RBT is
 	 */
 	public int getHeight() {
-		return height;
+		return this.root.getHeight();
 	}
 
 	/**
@@ -306,10 +292,12 @@ public class RBTree {
 			x.setVal(0);
 			x.setMaxVal(0);
 			x.setEmax(this.getNILNode().getEmax());
+			x.setHeight(0);
 		} else {
 			x.setVal(x.getLeft().getVal() + x.getP() + x.getRight().getVal());
 			x.setMaxVal(Math.max(x.getLeft().getMaxVal(),
 					Math.max(x.getLeft().getVal() + x.getP(), x.getLeft().getVal() + x.getP() + x.getRight().getMaxVal())));
+			x.setHeight(Math.max(x.getLeft().getHeight(), x.getRight().getHeight()) + 1);
 			if(x.getLeft().getEmax() != this.getNILNode().getEmax() && x.getMaxVal() == x.getLeft().getMaxVal()) {
 				x.setEmax(x.getLeft().getEmax());
 			} else if(x.getMaxVal() == (x.getLeft().getVal() + x.getP())){
@@ -321,7 +309,6 @@ public class RBTree {
 			}
 			updateNodeValues(x.getParent());
 		}
-		this.height = this.getHeightRootCalc();
 	}
 	
 	/**
